@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  api:
+    image: docker.jala.pro/docker-training/backend:grettarocha
+    container_name: backend-app
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    volumes:
+      - backend-data:/usr/src/app/data
+
+  fe:
+    image: docker.jala.pro/docker-training/frontend:grettarocha
+    container_name: frontend-app
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+    volumes:
+      - frontend-data:/usr/share/nginx/html
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  backend-data:
+  frontend-data:
